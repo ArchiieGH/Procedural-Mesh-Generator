@@ -9,6 +9,8 @@ public class MeshGenerator : MonoBehaviour
 
     [SerializeField] MeshFilter meshFilter;
     [SerializeField] Vector2Int Size;
+    [SerializeField] Vector2Int Offset;
+    [SerializeField] float Scale;
 
     Mesh mesh;
 
@@ -43,7 +45,8 @@ public class MeshGenerator : MonoBehaviour
         {
             for (int x = 0; x <= Size.x; x++)
             {
-                vertices[i] = new Vector3(x, 0, z);
+                float y = Mathf.PerlinNoise((float)x / Offset.x, z / (float)Offset.y) * Scale;
+                vertices[i] = new Vector3(x, y, z);
                 i++; // Iterates over every vertice 
             }
         }
